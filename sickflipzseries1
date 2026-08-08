@@ -1,3 +1,4 @@
+_config.yml
 const divisions = [
   {
     name: "DIVISION 1",
