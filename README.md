@@ -1,4 +1,5 @@
 [README.md](https://github.com/user-attachments/files/30863910/README.md)
+remote_theme: pages-themes/midnight@v0.2.0
 # SickFlipz— 2026 Series 1 Checklist
 
 2023 Mosaic Razzle Dazzle Bryce Young RC
