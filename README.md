@@ -1,4 +1,5 @@
 [README.md](https://github.com/user-attachments/files/30863910/README.md)
+<img width="1102" height="1428" alt="image" src="https://github.com/user-attachments/assets/f272eadf-08e8-468d-b853-db653b8a1ad8" />
 # SickFlipz— 2026 Series 1 Checklist
 
 2023 Mosaic Razzle Dazzle Bryce Young RC
