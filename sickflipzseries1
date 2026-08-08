@@ -1,0 +1,394 @@
+# SickFlipz Sick Hits
+
+Basic free static website for SickFlipz card checklists.
+
+## Files
+- `index.html` — main page
+- `styles.css` — design and responsive layout
+- `script.js` — checklist data
+
+## Updating the checklist
+Open `script.js` and edit the `divisions` list. Each division has:
+- `name`
+- `color`
+- `teams`
+
+The site requires no database or server and can be hosted for free with GitHub Pages.
+
+const divisions = [
+  {
+    name: "DIVISION 1",
+    color: "#0b2d6b",
+    teams: ["Panthers", "Giants", "Bills", "Jets"]
+  },
+  {
+    name: "DIVISION 2",
+    color: "#0b2d6b",
+    teams: ["Chargers", "Cowboys", "Raiders", "Falcons"]
+  },
+  {
+    name: "DIVISION 3",
+    color: "#b30f16",
+    teams: ["Buccaneers", "Commanders", "Saints", "49ers"]
+  },
+  {
+    name: "DIVISION 4",
+    color: "#b30f16",
+    teams: ["Chiefs", "Bengals", "Cardinals", "Broncos"]
+  },
+  {
+    name: "DIVISION 5",
+    color: "#381477",
+    teams: ["Ravens", "Eagles", "Browns", "Seahawks"]
+  },
+  {
+    name: "DIVISION 6",
+    color: "#0b2d6b",
+    teams: ["Patriots", "Dolphins", "Rams", "Colts"]
+  },
+  {
+    name: "DIVISION 7",
+    color: "#0b4f9f",
+    teams: ["Lions", "Jaguars", "Steelers", "Titans"]
+  },
+  {
+    name: "DIVISION 8",
+    color: "#0b2d6b",
+    teams: ["Bears", "Texans", "Packers", "Vikings"]
+  },
+  {
+    name: "DIVISION MISC",
+    color: "#111111",
+    teams: ["⚽ Soccer", "🏀 NBA", "⚾ MLB"]
+  }
+];
+
+const grid = document.querySelector(".division-grid");
+
+divisions.forEach((division) => {
+  const card = document.createElement("article");
+  card.className = "division";
+  card.style.setProperty("--division-color", division.color);
+
+  card.innerHTML = `
+    <div class="division-header">${division.name}</div>
+    <div class="teams">
+      ${division.teams.map(team => `<div class="team ${division.name.includes("MISC") ? "misc" : ""}">${team}</div>`).join("")}
+    </div>
+    <div class="buyer">
+      BUYER:
+      <span class="buyer-line"></span>
+    </div>
+  `;
+
+  grid.appendChild(card);
+});
+
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;600;700;800;900&display=swap');
+
+:root {
+  --navy: #071a3d;
+  --blue: #0b4fc4;
+  --red: #e51d2a;
+  --ink: #10131a;
+  --muted: #667085;
+  --card: #ffffff;
+  --line: #e5e7eb;
+  --bg: #f4f6fa;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Inter, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+}
+
+.hero {
+  background:
+    radial-gradient(circle at 15% 50%, rgba(11,79,196,.45), transparent 28%),
+    linear-gradient(135deg, #030b1d, #0b1d43 55%, #061229);
+  color: white;
+  padding: 42px 20px;
+  border-bottom: 5px solid var(--red);
+}
+.hero-inner {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+.brand-mark {
+  width: 82px;
+  height: 82px;
+  border: 4px solid white;
+  outline: 4px solid var(--blue);
+  display: grid;
+  place-items: center;
+  font-family: Anton, sans-serif;
+  font-size: 35px;
+  transform: skew(-6deg);
+}
+.eyebrow {
+  margin: 0 0 3px;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 4px;
+}
+h1, h2, h3 { margin-top: 0; }
+h1 {
+  margin-bottom: 4px;
+  font-family: Anton, Impact, sans-serif;
+  font-size: clamp(54px, 9vw, 94px);
+  line-height: .9;
+  letter-spacing: 2px;
+}
+.tagline { margin: 8px 0 0; color: #d7e2ff; font-weight: 600; }
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: white;
+  border-bottom: 1px solid var(--line);
+}
+.nav-inner {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  gap: 8px;
+  padding: 10px 20px;
+  overflow-x: auto;
+}
+.nav a {
+  color: var(--navy);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 800;
+  white-space: nowrap;
+  padding: 10px 14px;
+  border-radius: 999px;
+}
+.nav a:hover { background: #eef3ff; }
+
+main { max-width: 1100px; margin: auto; padding: 38px 20px 60px; }
+
+.intro { text-align: center; max-width: 720px; margin: 0 auto 28px; }
+.series-badge {
+  display: inline-block;
+  background: var(--red);
+  color: white;
+  font-weight: 900;
+  font-size: 12px;
+  letter-spacing: 2px;
+  padding: 7px 12px;
+  border-radius: 5px;
+}
+.intro h2 {
+  font-family: Anton, Impact, sans-serif;
+  font-size: clamp(38px, 6vw, 58px);
+  margin: 12px 0 7px;
+  letter-spacing: 1px;
+}
+.intro p { color: var(--muted); line-height: 1.6; }
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin: 28px 0;
+}
+.stats div {
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 18px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(0,0,0,.04);
+}
+.stats strong {
+  display: block;
+  font-family: Anton, sans-serif;
+  font-size: 34px;
+  color: var(--blue);
+}
+.stats span { color: var(--muted); font-size: 12px; font-weight: 800; text-transform: uppercase; }
+
+.division-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.division {
+  background: white;
+  border: 2px solid var(--division-color);
+  border-radius: 13px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0,0,0,.06);
+}
+.division-header {
+  background: var(--division-color);
+  color: white;
+  padding: 12px 15px;
+  font-family: Anton, sans-serif;
+  letter-spacing: 1px;
+  font-size: 24px;
+}
+.teams {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.team {
+  min-height: 76px;
+  padding: 15px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-weight: 900;
+  border-bottom: 1px solid var(--line);
+}
+.team:nth-child(odd) { border-right: 1px solid var(--line); }
+.team:last-child, .team:nth-last-child(2) { border-bottom: 0; }
+.team.misc { min-height: 105px; font-size: 18px; }
+.buyer {
+  padding: 12px 15px;
+  border-top: 1px solid var(--line);
+  font-size: 12px;
+  font-weight: 900;
+}
+.buyer-line {
+  display: block;
+  height: 18px;
+  border-bottom: 2px solid #333;
+  margin-top: 3px;
+}
+
+.info {
+  margin-top: 55px;
+  padding-top: 35px;
+  border-top: 1px solid var(--line);
+}
+.info h2 {
+  font-family: Anton, sans-serif;
+  font-size: 38px;
+  text-align: center;
+}
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.info article {
+  background: white;
+  padding: 22px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+}
+.info article > span {
+  color: var(--red);
+  font-weight: 900;
+  font-size: 12px;
+}
+.info h3 { margin: 8px 0; }
+.info p { color: var(--muted); line-height: 1.5; font-size: 14px; }
+
+footer {
+  background: var(--navy);
+  color: white;
+  text-align: center;
+  padding: 28px 20px;
+}
+footer strong { font-family: Anton, sans-serif; letter-spacing: 2px; }
+footer p { color: #b9c7e6; font-size: 12px; }
+
+@media (max-width: 800px) {
+  .division-grid { grid-template-columns: repeat(2, 1fr); }
+  .info-grid { grid-template-columns: 1fr; }
+}
+@media (max-width: 560px) {
+  .hero { padding: 28px 18px; }
+  .hero-inner { align-items: flex-start; }
+  .brand-mark { width: 62px; height: 62px; font-size: 25px; }
+  h1 { font-size: 49px; }
+  .stats { grid-template-columns: 1fr; }
+  .division-grid { grid-template-columns: 1fr; }
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SickFlipz Sick Hits | Card Checklists</title>
+  <meta name="description" content="SickFlipz card checklists, custom divisions, repacks, chasers, and hit lists.">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="brand-mark">SF</div>
+      <div>
+        <p class="eyebrow">SICKFLIPZ PRESENTS</p>
+        <h1>SICK HITS</h1>
+        <p class="tagline">Card Checklists • Repack Breaks • Custom Divisions</p>
+      </div>
+    </div>
+  </header>
+
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="#current">Current Checklist</a>
+      <a href="#divisions">Divisions</a>
+      <a href="#how-it-works">How It Works</a>
+    </div>
+  </nav>
+
+  <main>
+    <section class="intro" id="current">
+      <span class="series-badge">2026 SERIES 1</span>
+      <h2>Custom Divisions</h2>
+      <p>Use this page to follow the current SickFlipz checklist. Click a division to expand it and see the teams included.</p>
+    </section>
+
+    <section class="stats">
+      <div><strong>8</strong><span>NFL Divisions</span></div>
+      <div><strong>32</strong><span>NFL Teams</span></div>
+      <div><strong>3</strong><span>Misc Sports</span></div>
+    </section>
+
+    <section id="divisions" class="division-grid"></section>
+
+    <section id="how-it-works" class="info">
+      <h2>How It Works</h2>
+      <div class="info-grid">
+        <article>
+          <span>01</span>
+          <h3>Pick a Division</h3>
+          <p>Choose the division you bought during the SickFlipz show.</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>Follow the Checklist</h3>
+          <p>Use this page as a quick reference for the teams and sports in your division.</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>Chase the Hits</h3>
+          <p>Keep an eye out for the big cards, numbered cards, autos, and other Sick Hits.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <strong>SICKFLIPZ SICK HITS</strong>
+    <p>2026 Series 1 • Custom Divisions</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
